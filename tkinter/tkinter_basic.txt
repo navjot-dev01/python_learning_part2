@@ -1,0 +1,53 @@
+from tkinter import font        #font = lets you control text style (size, bold, etc.)
+import tkinter as tk            #tk = the classic widgets tk.Label, tk.Button, etc.
+from tkinter import *           #imports everything (including Tk, used below) so you don't have to write tk.Tk() every time
+from tkinter import ttk         #the "themed" (nicer-looking) widgets
+
+screenName=None → Normally used if you want to run Tkinter on a specific display/screen (like in multi‑monitor setups). None means default screen.
+baseName='hello_world' → Internal base name for the application. Tkinter uses this for some internal resource naming.
+className='My first app' → Sets the class name of the window. This can affect how the window is identified by the operating system or window manager.
+useTk=1 → Enables the Tk toolkit. 1 means “true” (use Tk). If set to 0, Tkinter would not initialize the Tk GUI system.
+-----------------------------------------------------------------------------------------------------------
+In practice, most people just write:
+root = Tk()
+-------------------------------------------------------------------------------------------------------
+labels = tk.Label(root, text="Hello World")
+root → The parent window where the label will appear.
+text="Hello World" → The text displayed inside the label.
+So this line makes a label that says Hello World inside the main window.
+-------------------------------------------------------------------------------------------------------
+labels.pack()
+.pack() → A geometry manager that places the widget in the window.
+It automatically arranges the label in the center/top of the window.
+Without .pack() (or .grid() / .place()), the widget would exist but not be visible
+-------------------------------------------------------------------------------------------------------
+frm = ttk.Frame(root, padding=10)
+ttk.Frame → Creates a container (like a box) inside the main window (root).
+root → Parent window where this frame lives.
+padding=10 → Adds 10 pixels of space inside the frame (so widgets don’t touch the edges).
+--------------------------------------------------------------------------------------------------------
+.grid(column=0, row=0) → Places the label in row 0, column 0 of the frame’s grid.
+ttk.Button(frm, text="Quit", command=root.destroy).grid(column=1, row=2)
+ttk.Button → Creates a button.
+frm → Parent container (the frame).
+text="Quit" → Button text.
+command=root.destroy → Action when clicked → closes the window.
+.grid(column=1, row=2) → Places the button in row 2, column 1 of the frame’s grid.
+👉 So the button appears lower down and slightly to the right.
+
+
+grid()
+When to use:  
+Use grid when your layout is naturally like a table — rows and columns.
+Perfect for forms, calculators, or anything that looks like a spreadsheet.
+
+place()
+When to use:  
+Use place when you want absolute control — exact pixel positions or relative percentages.
+Good for custom designs, games, or when you need precise placement.
+
+pack()
+Think of stacking books in a box.
+Widgets are placed one after another: top, bottom, left, or right.
+Best when you just want things neatly stacked.
+Example: Login form (Label → Entry → Button).
